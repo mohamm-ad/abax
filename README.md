@@ -4,7 +4,7 @@ Abax is a simple shell script that provides statistics about your codebase, incl
 
 ### Why the name?
 
-"Abax" (ἄβαξ) is an ancient Greek word referring to a calculating table or counting board - one of the earliest mathematical tools used for calculations and measurements. The first record of an abacus may have been in Sumeria between 2700 and 2300 BC. It held a table of successive columns which delimited the successive orders of magnitude of their sexagesimal (base 60) number system.
+"Abax" (ἄβαξ) is an ancient Greek word referring to a calculating table or counting board - one of the earliest mathematical tools used for calculations and measurements. The first record of what became known as an abacus may have been in Sumeria between 2700 and 2300 BC. It held a table of successive columns which delimited the successive orders of magnitude of their sexagesimal (base 60) number system.
 
 ## Features
 
