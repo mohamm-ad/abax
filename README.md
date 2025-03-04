@@ -49,37 +49,9 @@ The script will prompt you for:
 
 ### Example Output
 
-<pre style="line-height:1.2">
-<span style="color:#0000ff">┌────────────────────────────────────────────┐</span>
-<span style="color:#0000ff">│</span>                                            <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#00ffff; font-weight:bold">    █████</span><span style="color:#ff0000">╗</span> <span style="color:#00ff00">██████</span><span style="color:#ff0000">╗</span> <span style="color:#ffff00">█████</span><span style="color:#ff0000">╗</span> <span style="color:#800080">██</span><span style="color:#ff0000">╗  </span><span style="color:#800080">██</span><span style="color:#ff0000">╗</span>  <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#00ffff; font-weight:bold">   ██</span><span style="color:#ff0000">╔══</span><span style="color:#00ffff">██</span><span style="color:#ff0000">╗</span><span style="color:#00ff00">██</span><span style="color:#ff0000">╔══</span><span style="color:#00ff00">██</span><span style="color:#ff0000">╗</span><span style="color:#ffff00">██</span><span style="color:#ff0000">╔══</span><span style="color:#ffff00">██</span><span style="color:#ff0000">╗</span><span style="color:#800080">╚██</span><span style="color:#ff0000">╗</span><span style="color:#800080">██</span><span style="color:#ff0000">╔╝</span>  <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#00ffff; font-weight:bold">   ███████</span><span style="color:#ff0000">║</span><span style="color:#00ff00">██████</span><span style="color:#ff0000">╔╝</span><span style="color:#ffff00">███████</span><span style="color:#ff0000">║</span><span style="color:#800080"> ╚███</span><span style="color:#ff0000">╔╝</span>   <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#00ffff; font-weight:bold">   ██</span><span style="color:#ff0000">╔══</span><span style="color:#00ffff">██</span><span style="color:#ff0000">║</span><span style="color:#00ff00">██</span><span style="color:#ff0000">╔══</span><span style="color:#00ff00">██</span><span style="color:#ff0000">╗</span><span style="color:#ffff00">██</span><span style="color:#ff0000">╔══</span><span style="color:#ffff00">██</span><span style="color:#ff0000">║</span><span style="color:#800080"> ██</span><span style="color:#ff0000">╔</span><span style="color:#800080">██</span><span style="color:#ff0000">╗</span>   <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#00ffff; font-weight:bold">   ██</span><span style="color:#ff0000">║  </span><span style="color:#00ffff">██</span><span style="color:#ff0000">║</span><span style="color:#00ff00">██████</span><span style="color:#ff0000">╔╝</span><span style="color:#ffff00">██</span><span style="color:#ff0000">║  </span><span style="color:#ffff00">██</span><span style="color:#ff0000">║</span><span style="color:#800080">██</span><span style="color:#ff0000">╔╝ </span><span style="color:#800080">██</span><span style="color:#ff0000">╗</span>  <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#ff0000">   ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝</span>  <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>                                            <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">│</span>  <span style="color:#ffa500">&lt;&gt;  Code Statistics Tool  &lt;/&gt;</span>             <span style="color:#0000ff">│</span>
-<span style="color:#0000ff">└────────────────────────────────────────────┘</span>
-
-<span style="color:#00ff00">Total text files:</span> 152
-<span style="color:#ffff00">Binary/media files (not counted in line total):</span> 23
-<span style="color:#00ff00">Total lines of code:</span> 12548
-<span style="color:#00ffff">Total characters:</span> 389742
-<span style="color:#800080">Estimated tokens (4 chars = 1 token):</span> 97435
-
-<span style="color:#00ff00">Lines, characters, and estimated tokens by file extension:</span>
-<span style="color:#0000ff">Extension    Files       Lines       Characters     Est. Tokens</span>
-------------------------------------------------------------------------
-<span style="color:#0000ff">.tsx</span>            42         5421          178924           44731
-<span style="color:#0000ff">.js</span>             24         3102           95842           23960
-<span style="color:#0000ff">.css</span>            18         1852           56248           14062
-<span style="color:#0000ff">.json</span>           15          958           24368            6092
-<span style="color:#0000ff">.md</span>             12          842           19873            4968
+![Abax Script Output Example](./assets/abax_example.png)
 ...
-</pre>
 
-> **Note:** The actual output in your terminal will be colorized as shown above to improve readability.
 
 ## Customization
 
@@ -98,7 +70,7 @@ Abax automatically detects and separately reports on binary/media files with the
 
 ### Token Estimation
 
-The default token estimation uses a ratio of 4 characters = 1 token, which is a general approximation. For more accurate estimations specific to certain models, you can customize this ratio when prompted.
+The default token estimation uses a ratio of 4 characters = 1 token, which is a very rough general approximation. For more accurate estimations specific to certain models, you can customize this ratio when prompted.
 
 ## Notes
 
@@ -108,7 +80,7 @@ The default token estimation uses a ratio of 4 characters = 1 token, which is a 
 
 ## License
 
-[MIT License](LICENSE)
+[MIT License](./LICENSE)
 
 ## Contributing
 
