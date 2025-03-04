@@ -2,6 +2,10 @@
 
 Abax is a simple shell script that provides statistics about your codebase, including line counts, character counts, and very rough token estimations. This tool is particularly useful for developers who want to understand the size and composition of their repositories or estimate token usage for large language models.
 
+### Why the name?
+
+"Abax" (ἄβαξ) is an ancient Greek word referring to a calculating table or counting board - one of the earliest mathematical tools used for calculations and measurements. The first record of an abacus may have been in Sumeria between 2700 and 2300 BC. It held a table of successive columns which delimited the successive orders of magnitude of their sexagesimal (base 60) number system.
+
 ## Features
 
 - 📊 **Detailed Statistics**: Count lines, characters, and estimate tokens in your codebase
@@ -81,10 +85,6 @@ The default token estimation uses a ratio of 4 characters = 1 token, which is a 
 ## License
 
 [MIT License](./LICENSE)
-
-## About the Name
-
-"Abax" (ἄβαξ) is an ancient Greek word referring to a calculating table or counting board - one of the earliest mathematical tools used for calculations and measurements.
 
 ## Contributing
 
