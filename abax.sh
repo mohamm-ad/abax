@@ -12,17 +12,26 @@ PURPLE='\033[0;35m'
 PINK='\033[0;95m'  # Light magenta/pink
 BOLD_PINK='\033[1;95m'  # Bold light magenta/pink
 BRIGHT_BLUE='\033[0;95m'  # Bright blue for input prompts
+RED='\033[0;31m'
+ORANGE='\033[0;33m'
+BOLD='\033[1m'
 NC='\033[0m' # No Color
 
-# Display ABAX ASCII art logo
-echo -e "${CYAN}"
-echo '   _    ____    _    __  __'
-echo '  / \  | __ )  / \   \ \/ /'
-echo ' / _ \ |  _ \ / _ \   \  / '
-echo '/ ___ \| |_) / ___ \  /  \ '
-echo '/_/   \_\____/_/   \_\/_/\_\'
-echo -e "${NC}"
-echo -e "${BLUE}== Code Statistics Tool ==${NC}"
+# Display enhanced ABAX ASCII art logo with coding theme
+echo
+echo -e "${BLUE}┌────────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}│${NC}                                            ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${CYAN}${BOLD}    █████${NC}${RED}╗${NC} ${GREEN}██████${NC}${RED}╗${NC} ${YELLOW}█████${NC}${RED}╗${NC} ${PURPLE}██${NC}${RED}╗  ${NC}${PURPLE}██${NC}${RED}╗${NC}  ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${CYAN}${BOLD}   ██${NC}${RED}╔══${NC}${CYAN}██${NC}${RED}╗${NC}${GREEN}██${NC}${RED}╔══${NC}${GREEN}██${NC}${RED}╗${NC}${YELLOW}██${NC}${RED}╔══${NC}${YELLOW}██${NC}${RED}╗${NC}${PURPLE}╚██${NC}${RED}╗${NC}${PURPLE}██${NC}${RED}╔╝${NC}  ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${CYAN}${BOLD}   ███████${NC}${RED}║${NC}${GREEN}██████${NC}${RED}╔╝${NC}${YELLOW}███████${NC}${RED}║${NC}${PURPLE} ╚███${NC}${RED}╔╝${NC}   ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${CYAN}${BOLD}   ██${NC}${RED}╔══${NC}${CYAN}██${NC}${RED}║${NC}${GREEN}██${NC}${RED}╔══${NC}${GREEN}██${NC}${RED}╗${NC}${YELLOW}██${NC}${RED}╔══${NC}${YELLOW}██${NC}${RED}║${NC}${PURPLE} ██${NC}${RED}╔${NC}${PURPLE}██${NC}${RED}╗${NC}   ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${CYAN}${BOLD}   ██${NC}${RED}║  ${NC}${CYAN}██${NC}${RED}║${NC}${GREEN}██████${NC}${RED}╔╝${NC}${YELLOW}██${NC}${RED}║  ${NC}${YELLOW}██${NC}${RED}║${NC}${PURPLE}██${NC}${RED}╔╝ ${NC}${PURPLE}██${NC}${RED}╗${NC}  ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${RED}   ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝${NC}  ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}                                            ${BLUE}│${NC}"
+echo -e "${BLUE}│${NC}  ${ORANGE}<>  Code Statistics Tool  </>             ${BLUE}│${NC}"
+echo -e "${BLUE}└────────────────────────────────────────────┘${NC}"
+echo
+
 echo -e "${BLUE}This script counts lines, characters, and tokens in your codebase${NC}"
 echo -e "${BLUE}--------------------------------------------------------${NC}"
 
@@ -48,6 +57,29 @@ else
         EXCLUDE_DIRS="$custom_exclude_dirs"
         echo -e "${GREEN}Using custom exclusions: $EXCLUDE_DIRS${NC}"
     fi
+fi
+
+# Ask user about token estimation ratio
+DEFAULT_CHARS_PER_TOKEN=4
+echo -e "\n${BRIGHT_BLUE}The default token estimation uses ${DEFAULT_CHARS_PER_TOKEN} characters = 1 token.${NC}"
+echo -e "${BRIGHT_BLUE}Would you like to use a different ratio? (y/n)${NC}"
+read -p "> " change_token_ratio
+
+if [[ $change_token_ratio =~ ^[Yy]$ ]]; then
+    echo -e "${BRIGHT_BLUE}Enter the number of characters per token:${NC}"
+    read -p "> " custom_chars_per_token
+    
+    # Validate input is a positive number
+    if [[ $custom_chars_per_token =~ ^[0-9]+(\.[0-9]+)?$ ]] && (( $(echo "$custom_chars_per_token > 0" | bc -l) )); then
+        CHARS_PER_TOKEN=$custom_chars_per_token
+        echo -e "${GREEN}Using custom ratio: $CHARS_PER_TOKEN characters = 1 token${NC}"
+    else
+        echo -e "${YELLOW}Invalid input. Using default ratio: $DEFAULT_CHARS_PER_TOKEN characters = 1 token${NC}"
+        CHARS_PER_TOKEN=$DEFAULT_CHARS_PER_TOKEN
+    fi
+else
+    CHARS_PER_TOKEN=$DEFAULT_CHARS_PER_TOKEN
+    echo -e "${GREEN}Using default ratio: $CHARS_PER_TOKEN characters = 1 token${NC}"
 fi
 
 # Prepare find command exclusion parameters
@@ -78,11 +110,11 @@ total_stats_cmd="find . -type f $FIND_EXCLUSIONS | grep -v -E \"\.(${BINARY_EXTE
 total_stats=$(eval $total_stats_cmd)
 total_lines=$(echo "$total_stats" | awk '{print $1}')
 total_chars=$(echo "$total_stats" | awk '{print $2}')
-total_tokens=$(echo "$total_chars / 4" | bc)
+total_tokens=$(echo "$total_chars / $CHARS_PER_TOKEN" | bc)
 
 echo -e "${GREEN}Total lines of code:${NC} $total_lines"
 echo -e "${CYAN}Total characters:${NC} $total_chars"
-echo -e "${PURPLE}Estimated tokens (1 token ≈ 4 chars):${NC} $total_tokens"
+echo -e "${PURPLE}Estimated tokens ($CHARS_PER_TOKEN chars = 1 token):${NC} $total_tokens"
 
 # Count lines and characters by file extension (excluding binary files)
 echo -e "\n${GREEN}Lines, characters, and estimated tokens by file extension:${NC}"
@@ -97,7 +129,7 @@ eval $extensions_cmd | while read count ext; do
         ext_stats=$(eval $ext_stats_cmd)
         ext_lines=$(echo "$ext_stats" | awk '{print $1}')
         ext_chars=$(echo "$ext_stats" | awk '{print $2}')
-        ext_tokens=$(echo "$ext_chars / 4" | bc)
+        ext_tokens=$(echo "$ext_chars / $CHARS_PER_TOKEN" | bc)
         
         if [ "$ext_lines" != "" ] && [ "$ext_chars" != "" ]; then
             printf "${BLUE}%-10s${NC} %8d %15d %17d %17d\n" ".$ext" $count $ext_lines $ext_chars $ext_tokens
@@ -115,7 +147,7 @@ eval $binary_extensions_cmd | while read count ext; do
 done
 
 echo -e "\n${BOLD_PINK}Note: .git directory is always excluded as it contains binary files and repository metadata.${NC}"
-echo -e "${BOLD_PINK}Token estimation disclaimer: Token counts are estimated using a simple 4 characters = 1 token ratio.${NC}"
+echo -e "${BOLD_PINK}Token estimation disclaimer: Token counts are estimated using $CHARS_PER_TOKEN characters = 1 token ratio.${NC}"
 echo -e "${BOLD_PINK}Actual token counts may vary based on the tokenization algorithm used by different models.${NC}"
 
 # Calculate and display execution time with millisecond precision
