@@ -82,6 +82,10 @@ The default token estimation uses a ratio of 4 characters = 1 token, which is a 
 
 [MIT License](./LICENSE)
 
+## About the Name
+
+"Abax" (ἄβαξ) is an ancient Greek word referring to a calculating table or counting board - one of the earliest mathematical tools used for calculations and measurements.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. 
